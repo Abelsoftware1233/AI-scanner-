@@ -1,0 +1,39 @@
+[Unit]
+Description=AI Beveiligingsscanner (Flask via gunicorn)
+After=network.target ollama.service
+Wants=ollama.service
+
+[Service]
+Type=simple
+User=aiscanner
+Group=aiscanner
+WorkingDirectory=/opt/ai-scanner
+Environment=OLLAMA_URL=http://127.0.0.1:11434
+Environment=OLLAMA_MODEL=dolphin-llama3
+Environment=OLLAMA_TIMEOUT=300
+Environment=DATA_DIR=/var/lib/ai-scanner
+# Eén worker: scans draaien als achtergrondthread in dit proces
+ExecStart=/opt/ai-scanner/.venv/bin/gunicorn \
+    --bind 127.0.0.1:8976 \
+    --workers 1 --threads 8 \
+    --timeout 320 \
+    --access-logfile - \
+    app:app
+Restart=on-failure
+RestartSec=5
+
+# Geschiedenis (SQLite) komt in /var/lib/ai-scanner
+StateDirectory=ai-scanner
+StateDirectoryMode=0700
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target
