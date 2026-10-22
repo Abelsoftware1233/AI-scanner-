@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Beveiligingsscanner</title>
+    <link rel="stylesheet" href="{{ url_for('asset', name='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <h1>AI Beveiligingsscanner</h1>
+        </div>
+        <p class="subtitle">Lokale code-audit met Ollama <span id="status" class="status" title="Ollama-status">&#9679;</span></p>
+
+        <!-- Applicatie -->
+        <section id="appPanel">
+            <div class="row">
+                <div>
+                    <label for="scanType">Type scan</label>
+                    <select id="scanType"></select>
+                </div>
+                <div>
+                    <label for="model">Model</label>
+                    <select id="model"></select>
+                </div>
+            </div>
+
+            <nav class="tabs">
+                <button type="button" class="tab active" data-tab="paste">Code plakken</button>
+                <button type="button" class="tab" data-tab="project">Map / zip</button>
+                <button type="button" class="tab" data-tab="history">Geschiedenis</button>
+            </nav>
+
+            <div id="tab-paste" class="tabpanel">
+                <form id="scanForm">
+                    <label for="codeInput">Plak code of serverconfiguratie</label>
+                    <textarea id="codeInput" spellcheck="false"
+                        placeholder="Bijv: $query = 'SELECT * FROM users WHERE user = ' . $_POST['user'];"></textarea>
+                    <div class="meta">
+                        <span id="counter">0 tekens</span>
+                        <label class="filebtn">Bestand laden
+                            <input type="file" id="fileInput" hidden>
+                        </label>
+                    </div>
+                    <button type="submit" id="submitBtn">Start AI-scan</button>
+                </form>
+            </div>
+
+            <div id="tab-project" class="tabpanel" hidden>
+                <p class="muted">Kies een map, losse bestanden of een zipbestand. Alleen code- en configuratiebestanden worden gescand (geen node_modules, .git, enz.). De scan draait op de achtergrond en je kunt de pagina rustig sluiten.</p>
+                <div class="pickers">
+                    <label class="pickbtn">Map kiezen<input type="file" id="folderInput" webkitdirectory hidden></label>
+                    <label class="pickbtn">Bestanden kiezen<input type="file" id="filesInput" multiple hidden></label>
+                    <label class="pickbtn">Zipbestand kiezen<input type="file" id="zipInput" accept=".zip" hidden></label>
+                </div>
+                <p id="projectInfo" class="muted">Nog niets geselecteerd.</p>
+                <button type="button" id="projectBtn" disabled>Scan project</button>
+            </div>
+
+            <div id="tab-history" class="tabpanel" hidden>
+                <div class="results-head">
+                    <h2>Eerdere scans</h2>
+                    <button type="button" id="clearHistoryBtn" class="secondary small">Alles wissen</button>
+                </div>
+                <ul id="historyList" class="history"></ul>
+                <p class="note">Er wordt alleen het resultaat bewaard, niet de ingevoerde code. Het resultaat kan wel stukjes code bevatten.</p>
+            </div>
+
+            <div class="results-section">
+                <div class="results-head">
+                    <h2>Analyseresultaat</h2>
+                    <div class="actions">
+                        <button type="button" id="cancelBtn" class="secondary small" hidden>Annuleren</button>
+                        <button type="button" id="copyBtn" class="secondary small" hidden>Kopieer</button>
+                    </div>
+                </div>
+                <progress id="progress" max="1" value="0" hidden></progress>
+                <p id="progressText" class="muted" hidden></p>
+                <div class="results-container">
+                    <div id="output"><span class="muted">Nog geen scan uitgevoerd. Vul code in en start de scan.</span></div>
+                </div>
+                <p class="note">AI-resultaten kunnen fouten of gemiste kwetsbaarheden bevatten. Controleer bevindingen altijd zelf en gebruik dit naast, niet in plaats van, een professionele audit.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('asset', name='script.js') }}"></script>
+</body>
+</html>
