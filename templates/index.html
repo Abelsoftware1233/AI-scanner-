@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Vulnerability Scanner (Dolphin-Llama3)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+        h1 {
+            color: #38bdf8;
+            text-align: center;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #cbd5e1;
+        }
+        select, textarea, button {
+            width: 100%;
+            margin-top: 5px;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: #f8fafc;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        textarea {
+            height: 180px;
+            font-family: monospace;
+        }
+        button {
+            background: #0284c7;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #0ea5e9;
+        }
+        button:disabled {
+            background: #475569;
+            cursor: not-allowed;
+        }
+        .results-section {
+            margin-top: 30px;
+        }
+        .results-container {
+            background: #0f172a;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #334155;
+            min-height: 150px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: monospace;
+            margin: 0;
+            color: #e2e8f0;
+        }
+        .loading {
+            color: #38bdf8;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Beveiligingsscanner</h1>
+        <p class="subtitle">Aangedreven door jouw lokale <strong>dolphin-llama3</strong> model</p>
+        
+        <form id="scanForm">
+            <label for="scanType">Kies type beveiligingsscan:</label>
+            <select id="scanType">
+                <option value="sql_injection">SQL Injectie Specialistische Scan</option>
+                <option value="general">Algemene Code & Configuratie Audit</option>
+            </select>
+
+            <label for="codeInput">Plak code of serverconfiguratie:</label>
+            <textarea id="codeInput" placeholder="Bijv: $query = 'SELECT * FROM users WHERE user = ' . $_POST['user']; ..."></textarea>
+
+            <button type="submit" id="submitBtn">Start AI Scan</button>
+        </form>
+
+        <div class="results-section">
+            <h2>Analyseresultaat</h2>
+            <div class="results-container">
+                <div id="output"><span style="color: #64748b;">Nog geen scan uitgevoerd. Vul code in en start de scan.</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
