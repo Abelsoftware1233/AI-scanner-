@@ -17,8 +17,8 @@
                 <text x="32" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#e6f7ff">AI</text>
             </svg>
             <div class="brand-text">
-                <h1>NEXUS <span>AI</span> SCANNER</h1>
-                <p>GEAVANCEERDE CODE-BEVEILIGINGSANALYSE</p>
+                <h1>Abel123 AI <span>AI</span> SCANNER</h1>
+                <p>GEAVANCEERDE CODE-SECURITYANALYSE</p>
             </div>
             <span class="ollama" title="Ollama-status"><span id="status" class="status">&#9679;</span> Ollama</span>
         </header>
@@ -52,7 +52,7 @@
                                 placeholder="Plak hier code of een serverconfiguratie...&#10;Bijv: $query = 'SELECT * FROM users WHERE user = ' . $_POST['user'];"></textarea>
                             <div class="meta">
                                 <span id="counter">0 tekens</span>
-                                <label class="filebtn">Bestand laden
+                                <label class="filebtn">Files loading
                                     <input type="file" id="fileInput" hidden>
                                 </label>
                             </div>
@@ -61,11 +61,11 @@
                     </div>
 
                     <div id="tab-project" class="tabpanel" hidden>
-                        <p class="muted">Kies een map, losse bestanden of een zipbestand. Alle tekstbestanden worden gescand, ook .config, .service of .conf. Binaire bestanden en mappen als node_modules en .git worden overgeslagen. De scan draait op de achtergrond en je kunt de pagina rustig sluiten.</p>
+                        <p class="muted">Choose Map, single Files or zipfiles. Alle tekstbestanden worden gescand, ook .config, .service of .conf. Binaire bestanden en mappen als node_modules en .git worden overgeslagen. De scan draait op de achtergrond en je kunt de pagina rustig sluiten.</p>
                         <div class="pickers">
-                            <label class="pickbtn">Map kiezen<input type="file" id="folderInput" webkitdirectory hidden></label>
-                            <label class="pickbtn">Bestanden kiezen<input type="file" id="filesInput" multiple hidden></label>
-                            <label class="pickbtn">Zipbestand kiezen<input type="file" id="zipInput" accept=".zip" hidden></label>
+                            <label class="pickbtn">Choose Map<input type="file" id="folderInput" webkitdirectory hidden></label>
+                            <label class="pickbtn">Choose Files<input type="file" id="filesInput" multiple hidden></label>
+                            <label class="pickbtn">Choose ZipFile<input type="file" id="zipInput" accept=".zip" hidden></label>
                         </div>
                         <p id="projectInfo" class="muted">Nog niets geselecteerd.</p>
                         <button type="button" id="projectBtn" class="btn btn-green btn-block" disabled>Scan project</button>
@@ -74,8 +74,8 @@
 
                 <!-- Knoppenbalk -->
                 <div class="bar">
-                    <button type="button" id="newScanBtn" class="btn btn-green">Nieuwe scan</button>
-                    <button type="button" id="saveBtn" class="btn btn-cyan" disabled>Opslaan</button>
+                    <button type="button" id="newScanBtn" class="btn btn-green">New scan</button>
+                    <button type="button" id="saveBtn" class="btn btn-cyan" disabled>Save File</button>
                     <span class="spacer"></span>
                     <button type="button" id="settingsBtn" class="btn btn-ghost"><span class="ico">&#9881;</span> Instellingen</button>
                     <button type="button" id="historyBtn" class="btn btn-ghost"><span class="ico">&#8634;</span> Historie</button>
