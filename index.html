@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Donker thema, ook als de opmaak nog laadt of niet laadt: nooit een witte pagina -->
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#04122a">
+    <!-- Server-adres voor de scans. Leeg = dezelfde server als deze pagina (Flask/nginx).
+         Op GitHub Pages: zet hier het adres van je server, bijv. https://aiscanner.abelsoftware123.com -->
+    <meta name="api-base" content="">
+    <title>Nexus AI Scanner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Futuristische achtergrond: netwerk en skyline -->
+    <div class="bg" aria-hidden="true">
+        <svg class="bg-net" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#22d3ee" stroke-width="1">
+            <g stroke-opacity="0.28">
+<line x1="703" y1="184" x2="740" y2="185"/>
+<line x1="703" y1="184" x2="671" y2="215"/>
+<line x1="848" y1="79" x2="852" y2="80"/>
+<line x1="848" y1="79" x2="788" y2="89"/>
+<line x1="848" y1="79" x2="802" y2="129"/>
+<line x1="188" y1="126" x2="168" y2="91"/>
+<line x1="188" y1="126" x2="161" y2="156"/>
+<line x1="788" y1="89" x2="802" y2="129"/>
+<line x1="788" y1="89" x2="852" y2="80"/>
+<line x1="1079" y1="249" x2="1147" y2="150"/>
+<line x1="1079" y1="249" x2="968" y2="400"/>
+<line x1="116" y1="118" x2="168" y2="91"/>
+<line x1="116" y1="118" x2="161" y2="156"/>
+<line x1="116" y1="118" x2="188" y2="126"/>
+<line x1="928" y1="458" x2="968" y2="400"/>
+<line x1="928" y1="458" x2="1041" y2="461"/>
+<line x1="183" y1="276" x2="207" y2="337"/>
+<line x1="183" y1="276" x2="251" y2="222"/>
+<line x1="183" y1="276" x2="161" y2="156"/>
+<line x1="225" y1="464" x2="281" y2="554"/>
+<line x1="225" y1="464" x2="207" y2="337"/>
+<line x1="161" y1="156" x2="168" y2="91"/>
+<line x1="497" y1="93" x2="492" y2="77"/>
+<line x1="497" y1="93" x2="629" y2="104"/>
+<line x1="852" y1="80" x2="802" y2="129"/>
+<line x1="492" y1="77" x2="629" y2="104"/>
+<line x1="312" y1="326" x2="207" y2="337"/>
+<line x1="312" y1="326" x2="408" y2="279"/>
+<line x1="312" y1="326" x2="251" y2="222"/>
+<line x1="898" y1="177" x2="896" y2="198"/>
+<line x1="898" y1="177" x2="802" y2="129"/>
+<line x1="1147" y1="150" x2="898" y2="177"/>
+<line x1="1147" y1="150" x2="896" y2="198"/>
+<line x1="671" y1="215" x2="653" y2="284"/>
+<line x1="251" y1="222" x2="161" y2="156"/>
+<line x1="251" y1="222" x2="188" y2="126"/>
+<line x1="461" y1="538" x2="281" y2="554"/>
+<line x1="461" y1="538" x2="683" y2="506"/>
+<line x1="1128" y1="467" x2="1115" y2="536"/>
+<line x1="1128" y1="467" x2="1041" y2="461"/>
+<line x1="1128" y1="467" x2="968" y2="400"/>
+<line x1="683" y1="506" x2="743" y2="489"/>
+<line x1="683" y1="506" x2="653" y2="284"/>
+<line x1="968" y1="400" x2="1041" y2="461"/>
+<line x1="653" y1="284" x2="703" y2="184"/>
+<line x1="408" y1="279" x2="251" y2="222"/>
+<line x1="408" y1="279" x2="497" y2="93"/>
+<line x1="1115" y1="536" x2="1041" y2="461"/>
+<line x1="1115" y1="536" x2="968" y2="400"/>
+<line x1="743" y1="489" x2="928" y2="458"/>
+<line x1="629" y1="104" x2="703" y2="184"/>
+<line x1="629" y1="104" x2="671" y2="215"/>
+<line x1="896" y1="198" x2="802" y2="129"/>
+<line x1="896" y1="198" x2="852" y2="80"/>
+<line x1="740" y1="185" x2="671" y2="215"/>
+<circle class="node" cx="703" cy="184" r="2.0"/>
+<circle class="node" cx="848" cy="79" r="3.2"/>
+<circle class="node" cx="188" cy="126" r="4.4"/>
+<circle class="node" cx="788" cy="89" r="2.0"/>
+<circle class="node" cx="1079" cy="249" r="3.2"/>
+<circle class="node" cx="116" cy="118" r="4.4"/>
+<circle class="node" cx="928" cy="458" r="2.0"/>
+<circle class="node" cx="183" cy="276" r="3.2"/>
+<circle class="node" cx="225" cy="464" r="4.4"/>
+<circle class="node" cx="161" cy="156" r="2.0"/>
+<circle class="node" cx="497" cy="93" r="3.2"/>
+<circle class="node" cx="852" cy="80" r="4.4"/>
+<circle class="node" cx="492" cy="77" r="2.0"/>
+<circle class="node" cx="312" cy="326" r="3.2"/>
+<circle class="node" cx="898" cy="177" r="4.4"/>
+<circle class="node" cx="1147" cy="150" r="2.0"/>
+<circle class="node" cx="671" cy="215" r="3.2"/>
+<circle class="node" cx="251" cy="222" r="4.4"/>
+<circle class="node" cx="802" cy="129" r="2.0"/>
+<circle class="node" cx="168" cy="91" r="3.2"/>
+<circle class="node" cx="461" cy="538" r="4.4"/>
+<circle class="node" cx="1128" cy="467" r="2.0"/>
+<circle class="node" cx="683" cy="506" r="3.2"/>
+<circle class="node" cx="968" cy="400" r="4.4"/>
+<circle class="node" cx="653" cy="284" r="2.0"/>
+<circle class="node" cx="408" cy="279" r="3.2"/>
+<circle class="node" cx="207" cy="337" r="4.4"/>
+<circle class="node" cx="1115" cy="536" r="2.0"/>
+<circle class="node" cx="743" cy="489" r="3.2"/>
+<circle class="node" cx="629" cy="104" r="4.4"/>
+<circle class="node" cx="281" cy="554" r="2.0"/>
+<circle class="node" cx="896" cy="198" r="3.2"/>
+<circle class="node" cx="740" cy="185" r="4.4"/>
+<circle class="node" cx="1041" cy="461" r="2.0"/>
+            </g>
+        </svg>
+        <svg class="bg-city" viewBox="0 0 760 300" preserveAspectRatio="xMinYMax meet" fill="#061a33" stroke="#22d3ee" stroke-opacity="0.35" stroke-width="1">
+<rect x="0" y="87" width="54" height="213"/>
+<rect class="win" x="34" y="210" width="3" height="4"/>
+<rect class="win" x="37" y="245" width="3" height="4"/>
+<rect class="win" x="17" y="142" width="3" height="4"/>
+<rect class="win" x="37" y="216" width="3" height="4"/>
+<rect class="win" x="45" y="252" width="3" height="4"/>
+<rect class="win" x="16" y="119" width="3" height="4"/>
+<rect class="win" x="33" y="172" width="3" height="4"/>
+<rect class="win" x="14" y="118" width="3" height="4"/>
+<rect class="win" x="39" y="272" width="3" height="4"/>
+<rect x="61" y="78" width="28" height="222"/>
+<rect class="win" x="76" y="275" width="3" height="4"/>
+<rect class="win" x="75" y="252" width="3" height="4"/>
+<rect class="win" x="68" y="245" width="3" height="4"/>
+<rect class="win" x="66" y="221" width="3" height="4"/>
+<rect class="win" x="67" y="101" width="3" height="4"/>
+<rect class="win" x="66" y="134" width="3" height="4"/>
+<rect x="92" y="112" width="27" height="188"/>
+<rect x="104" y="80" width="3" height="40"/>
+<rect class="win" x="105" y="179" width="3" height="4"/>
+<rect class="win" x="107" y="195" width="3" height="4"/>
+<rect class="win" x="104" y="121" width="3" height="4"/>
+<rect class="win" x="107" y="141" width="3" height="4"/>
+<rect x="124" y="126" width="43" height="174"/>
+<rect class="win" x="131" y="199" width="3" height="4"/>
+<rect class="win" x="139" y="192" width="3" height="4"/>
+<rect class="win" x="145" y="207" width="3" height="4"/>
+<rect class="win" x="129" y="151" width="3" height="4"/>
+<rect class="win" x="147" y="161" width="3" height="4"/>
+<rect class="win" x="141" y="161" width="3" height="4"/>
+<rect class="win" x="156" y="208" width="3" height="4"/>
+<rect class="win" x="141" y="151" width="3" height="4"/>
+<rect class="win" x="129" y="134" width="3" height="4"/>
+<rect x="170" y="217" width="39" height="83"/>
+<rect x="188" y="181" width="3" height="26"/>
+<rect class="win" x="177" y="250" width="3" height="4"/>
+<rect class="win" x="199" y="259" width="3" height="4"/>
+<rect class="win" x="185" y="236" width="3" height="4"/>
+<rect class="win" x="184" y="267" width="3" height="4"/>
+<rect class="win" x="175" y="277" width="3" height="4"/>
+<rect class="win" x="199" y="240" width="3" height="4"/>
+<rect x="212" y="50" width="41" height="250"/>
+<rect x="231" y="35" width="3" height="28"/>
+<rect class="win" x="232" y="103" width="3" height="4"/>
+<rect class="win" x="238" y="201" width="3" height="4"/>
+<rect class="win" x="223" y="172" width="3" height="4"/>
+<rect class="win" x="233" y="106" width="3" height="4"/>
+<rect class="win" x="240" y="254" width="3" height="4"/>
+<rect class="win" x="221" y="165" width="3" height="4"/>
+<rect class="win" x="237" y="156" width="3" height="4"/>
+<rect class="win" x="220" y="159" width="3" height="4"/>
+<rect class="win" x="230" y="112" width="3" height="4"/>
+<rect x="255" y="79" width="43" height="221"/>
+<rect x="275" y="65" width="3" height="20"/>
+<rect class="win" x="272" y="241" width="3" height="4"/>
+<rect class="win" x="280" y="234" width="3" height="4"/>
+<rect class="win" x="263" y="97" width="3" height="4"/>
+<rect class="win" x="264" y="141" width="3" height="4"/>
+<rect x="303" y="228" width="42" height="72"/>
+<rect class="win" x="334" y="254" width="3" height="4"/>
+<rect class="win" x="320" y="240" width="3" height="4"/>
+<rect class="win" x="310" y="241" width="3" height="4"/>
+<rect class="win" x="314" y="273" width="3" height="4"/>
+<rect class="win" x="328" y="251" width="3" height="4"/>
+<rect x="347" y="135" width="49" height="165"/>
+<rect class="win" x="382" y="177" width="3" height="4"/>
+<rect class="win" x="376" y="189" width="3" height="4"/>
+<rect class="win" x="361" y="222" width="3" height="4"/>
+<rect class="win" x="366" y="206" width="3" height="4"/>
+<rect x="403" y="190" width="38" height="110"/>
+<rect class="win" x="414" y="285" width="3" height="4"/>
+<rect class="win" x="420" y="259" width="3" height="4"/>
+<rect class="win" x="427" y="208" width="3" height="4"/>
+<rect class="win" x="421" y="204" width="3" height="4"/>
+<rect class="win" x="411" y="211" width="3" height="4"/>
+<rect class="win" x="409" y="263" width="3" height="4"/>
+<rect class="win" x="416" y="228" width="3" height="4"/>
+<rect x="448" y="165" width="51" height="135"/>
+<rect x="472" y="132" width="3" height="29"/>
+<rect class="win" x="486" y="195" width="3" height="4"/>
+<rect class="win" x="457" y="189" width="3" height="4"/>
+<rect class="win" x="467" y="234" width="3" height="4"/>
+<rect class="win" x="488" y="256" width="3" height="4"/>
+<rect class="win" x="457" y="208" width="3" height="4"/>
+<rect x="502" y="226" width="39" height="74"/>
+<rect x="520" y="199" width="3" height="28"/>
+<rect class="win" x="508" y="236" width="3" height="4"/>
+<rect class="win" x="512" y="252" width="3" height="4"/>
+<rect class="win" x="518" y="267" width="3" height="4"/>
+<rect class="win" x="525" y="242" width="3" height="4"/>
+<rect x="543" y="195" width="49" height="105"/>
+<rect class="win" x="581" y="277" width="3" height="4"/>
+<rect class="win" x="556" y="278" width="3" height="4"/>
+<rect class="win" x="550" y="205" width="3" height="4"/>
+<rect class="win" x="578" y="248" width="3" height="4"/>
+<rect class="win" x="567" y="207" width="3" height="4"/>
+<rect x="594" y="107" width="30" height="193"/>
+<rect x="608" y="84" width="3" height="24"/>
+<rect class="win" x="601" y="134" width="3" height="4"/>
+<rect class="win" x="613" y="254" width="3" height="4"/>
+<rect class="win" x="610" y="126" width="3" height="4"/>
+<rect class="win" x="603" y="202" width="3" height="4"/>
+<rect x="628" y="55" width="31" height="245"/>
+<rect x="642" y="39" width="3" height="27"/>
+<rect class="win" x="633" y="284" width="3" height="4"/>
+<rect class="win" x="648" y="209" width="3" height="4"/>
+<rect class="win" x="633" y="222" width="3" height="4"/>
+<rect class="win" x="645" y="160" width="3" height="4"/>
+<rect class="win" x="633" y="218" width="3" height="4"/>
+<rect class="win" x="635" y="83" width="3" height="4"/>
+<rect class="win" x="635" y="226" width="3" height="4"/>
+<rect class="win" x="636" y="128" width="3" height="4"/>
+<rect class="win" x="646" y="249" width="3" height="4"/>
+<rect x="663" y="53" width="50" height="247"/>
+<rect class="win" x="697" y="275" width="3" height="4"/>
+<rect class="win" x="702" y="82" width="3" height="4"/>
+<rect class="win" x="701" y="253" width="3" height="4"/>
+<rect class="win" x="700" y="68" width="3" height="4"/>
+<rect class="win" x="687" y="214" width="3" height="4"/>
+<rect class="win" x="673" y="184" width="3" height="4"/>
+<rect x="715" y="52" width="40" height="248"/>
+<rect x="734" y="14" width="3" height="33"/>
+<rect class="win" x="735" y="125" width="3" height="4"/>
+<rect class="win" x="720" y="154" width="3" height="4"/>
+<rect class="win" x="729" y="96" width="3" height="4"/>
+<rect class="win" x="741" y="216" width="3" height="4"/>
+<rect class="win" x="726" y="192" width="3" height="4"/>
+<rect class="win" x="725" y="252" width="3" height="4"/>
+<rect class="win" x="730" y="228" width="3" height="4"/>
+<rect class="win" x="734" y="187" width="3" height="4"/>
+<rect x="758" y="127" width="46" height="173"/>
+<rect class="win" x="790" y="186" width="3" height="4"/>
+<rect class="win" x="776" y="233" width="3" height="4"/>
+<rect class="win" x="777" y="284" width="3" height="4"/>
+<rect class="win" x="783" y="188" width="3" height="4"/>
+        </svg>
+    </div>
+
+    <div class="page">
+
+        <!-- Kop met logo -->
+        <header class="brand">
+            <svg class="logo" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+                <polygon points="32,4 56,18 56,46 32,60 8,46 8,18" fill="none" stroke="#22d3ee" stroke-width="3" stroke-linejoin="round"/>
+                <polygon points="32,12 49,22 49,42 32,52 15,42 15,22" fill="rgba(34,211,238,0.12)" stroke="#67e8f9" stroke-width="1.5"/>
+                <text x="32" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#e6f7ff">AI</text>
+            </svg>
+            <div class="brand-text">
+                <h1><span class="w">NEXUS</span> <span class="ai">AI</span> <span class="w">SCANNER</span></h1>
+                <p>GEAVANCEERDE CODE-BEVEILIGINGSANALYSE</p>
+            </div>
+            <div class="chips">
+                <span class="chip" title="Ollama-status"><span id="status" class="status">&#9679;</span> Ollama</span>
+                <span class="chip chip-soft">Lokale AI</span>
+            </div>
+        </header>
+
+        <noscript><p class="note">Deze scanner heeft JavaScript nodig. Zet JavaScript aan in je browser.</p></noscript>
+
+        <main class="stage">
+
+            <!-- Scanapparaat -->
+            <section class="device">
+                <div class="device-head">
+                    <span class="bars"><i></i><i></i></span>
+                    <div class="head-text">
+                        <h2 id="headline">KLAAR OM TE SCANNEN</h2>
+                        <label class="typeline" for="scanType">SCANTYPE:
+                            <select id="scanType"></select>
+                        </label>
+                    </div>
+                </div>
+
+                <div id="viewport" class="viewport">
+                    <span class="corner tl"></span><span class="corner tr"></span>
+                    <span class="corner bl"></span><span class="corner br"></span>
+
+                    <nav class="tabs">
+                        <button type="button" class="tab active" data-tab="paste">Code plakken</button>
+                        <button type="button" class="tab" data-tab="project">Map / zip</button>
+                    </nav>
+
+                    <div id="tab-paste" class="tabpanel">
+                        <form id="scanForm">
+                            <textarea id="codeInput" spellcheck="false" aria-label="Code of serverconfiguratie"
+                                placeholder="Plak hier code of een serverconfiguratie...&#10;Bijv: $query = 'SELECT * FROM users WHERE user = ' . $_POST['user'];"></textarea>
+                            <div class="meta">
+                                <span id="counter">0 tekens</span>
+                                <label class="filebtn">Bestand laden
+                                    <input type="file" id="fileInput" hidden>
+                                </label>
+                            </div>
+                            <button type="submit" id="submitBtn" class="btn btn-green btn-block">Start AI-scan</button>
+                        </form>
+                    </div>
+
+                    <div id="tab-project" class="tabpanel" hidden>
+                        <p class="muted">Kies een map, losse bestanden of een zipbestand. Alle tekstbestanden worden gescand, ook .config, .service of .conf. Binaire bestanden en mappen als node_modules en .git worden overgeslagen. De scan draait op de achtergrond en je kunt de pagina rustig sluiten.</p>
+                        <div class="pickers">
+                            <label class="pickbtn">Map kiezen<input type="file" id="folderInput" webkitdirectory hidden></label>
+                            <label class="pickbtn">Bestanden kiezen<input type="file" id="filesInput" multiple hidden></label>
+                            <label class="pickbtn">Zipbestand kiezen<input type="file" id="zipInput" accept=".zip" hidden></label>
+                        </div>
+                        <p id="projectInfo" class="muted">Nog niets geselecteerd.</p>
+                        <button type="button" id="projectBtn" class="btn btn-green btn-block" disabled>Scan project</button>
+                    </div>
+                </div>
+
+                <!-- Knoppenbalk -->
+                <div class="bar">
+                    <button type="button" id="newScanBtn" class="btn btn-green">Nieuwe scan</button>
+                    <button type="button" id="saveBtn" class="btn btn-cyan" disabled>Opslaan</button>
+                    <span class="spacer"></span>
+                    <button type="button" id="settingsBtn" class="btn btn-ghost"><span class="ico">&#9881;</span> Instellingen</button>
+                    <button type="button" id="historyBtn" class="btn btn-ghost"><span class="ico">&#8634;</span> Historie</button>
+                </div>
+            </section>
+
+            <!-- Glazen kaarten -->
+            <aside class="side">
+                <div class="card">
+                    <div class="card-title">Voortgang</div>
+                    <div id="stProgress" class="card-value">&mdash;</div>
+                    <progress id="progress" max="100" value="0"></progress>
+                </div>
+
+                <div id="statusCard" class="card status-card">
+                    <span class="ring"></span>
+                    <div>
+                        <div class="card-title">Status:</div>
+                        <div id="stStatus" class="card-value small">WACHTEN...</div>
+                    </div>
+                </div>
+
+                <div class="card details">
+                    <dl>
+                        <div><dt>Datum:</dt><dd id="stDate">&mdash;</dd></div>
+                        <div><dt>Invoer:</dt><dd id="stInput">&mdash;</dd></div>
+                        <div><dt>Model:</dt><dd id="stModel">&mdash;</dd></div>
+                        <div><dt>Bevindingen:</dt><dd id="stFindings">&mdash;</dd></div>
+                    </dl>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Instellingen -->
+        <section id="settingsPanel" class="panel" hidden>
+            <h3 class="panel-title">Instellingen</h3>
+            <label class="field" for="model">Model
+                <select id="model"></select>
+            </label>
+            <p class="note">De modellen komen van je eigen Ollama-server. Het groene lampje bovenaan laat zien of de server bereikbaar is.</p>
+        </section>
+
+        <!-- Historie -->
+        <section id="historyPanel" class="panel" hidden>
+            <div class="panel-head">
+                <h3 class="panel-title">Historie</h3>
+                <button type="button" id="clearHistoryBtn" class="btn btn-line btn-small">Alles wissen</button>
+            </div>
+            <ul id="historyList" class="history"></ul>
+            <p class="note">Er wordt alleen het resultaat bewaard, niet de ingevoerde code. Het resultaat kan wel stukjes code bevatten.</p>
+        </section>
+
+        <!-- Resultaat -->
+        <section class="panel results">
+            <div class="panel-head">
+                <h3 class="panel-title">Analyseresultaat</h3>
+                <div class="actions">
+                    <button type="button" id="cancelBtn" class="btn btn-line btn-small" hidden>Annuleren</button>
+                    <button type="button" id="copyBtn" class="btn btn-line btn-small" hidden>Kopieer</button>
+                </div>
+            </div>
+            <p id="progressText" class="muted"></p>
+            <div class="results-container">
+                <div id="output"><span class="muted">Nog geen scan uitgevoerd. Vul code in en start de scan.</span></div>
+            </div>
+            <p class="note">AI-resultaten kunnen fouten of gemiste kwetsbaarheden bevatten. Controleer bevindingen altijd zelf en gebruik dit naast, niet in plaats van, een professionele audit.</p>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
